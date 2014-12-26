@@ -16,7 +16,7 @@ public class PoiTempTest {
 	public void test() {
 		TagUtil.registerTag(TestTag.class);
 		try {
-			PoiTemplate temp = new PoiTemplate(getClass().getResource("/temp3.xls").toString(),"e:/" + System.currentTimeMillis() + ".xls");
+			PoiTemplate temp = new PoiTemplate(getClass().getResource("/temp.xls").getFile(), getClass().getResource("/").getFile() + System.currentTimeMillis() + ".xls");
 			temp.addValue("hello", "hello excel!");
 			List<Student> students = Student.getStudents(8,5);
 			temp.addValue("students", students);
