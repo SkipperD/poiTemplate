@@ -15,6 +15,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+
 import org.apache.commons.beanutils.DynaBean;
 import org.apache.commons.beanutils.LazyDynaBean;
 import org.apache.commons.beanutils.PropertyUtils;
@@ -23,6 +28,9 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.apache.poi.ss.util.WorkbookUtil;
+import org.apache.poi.xssf.XLSBUnsupportedException;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
@@ -188,8 +196,9 @@ public class PoiTemplate {
 	 * 通过模板构建excel工作簿
 	 * @return
 	 * @throws IOException
+	 * @throws TransformerConfigurationException 
 	 */
-	public Workbook buildWorkbook() throws IOException{
+	public Workbook buildWorkbook() throws IOException {
 		if(in != null && wb == null){
 			if(is2007){
 				wb = new XSSFWorkbook(in);
