@@ -1,14 +1,23 @@
 package org.poiTemplate;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+
+import org.apache.poi.hssf.dev.BiffDrawingToXml;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.junit.Test;
-import org.poiTemplate.PoiTemplate;
-import org.poiTemplate.TagUtil;
 
 public class PoiTempTest {
 
@@ -81,6 +90,15 @@ public class PoiTempTest {
 		System.out.println(temp.parseString("abc${haha.map.xiaoming.studentName}${haha.map.xiaoming.studentSex}--123${haha.haha}"));
 	}
 	
-	
+	@Test
+	public void testExcelToXml() throws TransformerConfigurationException, IOException{
+		XSSFWorkbook xx = new XSSFWorkbook();
+		OutputStream os = new FileOutputStream(getClass().getResource("/").getFile() + System.currentTimeMillis() + ".xls");
+		InputStream is = new FileInputStream(getClass().getResource("/temp.xls").getFile());
+		BiffDrawingToXml.writeToFile(os, is, true, null);
+		/*DOMSource source = new DOMSource();
+		TransformerFactory tf = TransformerFactory.newInstance();
+		Transformer serializer = tf.newTransformer();*/
+	}
 	
 }
